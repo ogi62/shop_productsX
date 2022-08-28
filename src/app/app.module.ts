@@ -5,6 +5,8 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { RouterModule } from '@angular/router';
+import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './shared/shell/signin/signin.component';
@@ -40,6 +42,10 @@ const routes = [
     component: OrderSuccessComponent
   },
   {
+    path: 'my/orders',
+    component: MyOrdersComponent
+  },
+  {
     path: 'login',
     component: SigninComponent
   },
@@ -50,6 +56,11 @@ const routes = [
   {
     path: 'admin/orders',
     component: AdminOrdersComponent
+  },
+  {
+    path: '**',
+    redirectTo: '/',
+    pathMatch: 'full'
   }
 ]
 
@@ -71,7 +82,8 @@ const routes = [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgbDropdownModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
