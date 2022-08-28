@@ -7,11 +7,13 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './shared/shell/signin/signin.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
