@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'navbar',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private authService: AuthService ) { 
+  }
 
   ngOnInit(): void {
+  }
+
+  logout() {
+    console.log("logout mala !")
+    this.authService.logOut();
   }
 
 }

@@ -8,7 +8,7 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a routerLink="/" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a routerLink="shopping-cart" class="nav-link px-2 text-white">Shopping Cart</a></li>
+          <li><a routerLink="/login" class="nav-link px-2 text-white">Log In</a></li>
           <li><a routerLink="check-out" class="nav-link px-2 text-white">Check Out</a></li>
           <li ngbDropdown class="d-inline-block">
             <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Username</button>
@@ -16,7 +16,7 @@
               <button ngbDropdownItem routerLink="/my/orders">My Orders</button>
               <button ngbDropdownItem routerLink="/admin/orders">Manage Orders</button>
               <button ngbDropdownItem routerLink="/admin/products">Manage Products</button>
-              <button ngbDropdownItem >Log Out</button>
+              <button ngbDropdownItem (click)="logout()">Log Out</button>
             </div>
           </li>
         </ul>
