@@ -21,6 +21,7 @@ import { AdminProductsComponent } from './feature/admin/admin-products/admin-pro
 import { AdminOrdersComponent } from './feature/admin/admin-orders/admin-orders.component';
 import { AuthGuardService } from './shared/services/authGuardService/auth-guard.service';
 import { UserService } from './shared/services/userService/user.service';
+import { AdminAuthGuardService } from './shared/services/adminAuthGuardService/admin-auth-guard.service';
 
 const routes = [
   {
@@ -94,7 +95,12 @@ const routes = [
     RouterModule.forRoot(routes),
     NgbDropdownModule,
   ],
-  providers: [AuthService, AuthGuardService, UserService],
+  providers: [
+    AuthService, 
+    AuthGuardService,
+    UserService,
+    AdminAuthGuardService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

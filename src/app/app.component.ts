@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
     ) {
     auth.user$.subscribe((user)=> {
       if(user) {

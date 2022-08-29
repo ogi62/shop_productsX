@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase} from '@angular/fire/compat/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import { User } from 'firebase/auth';
+import { AppUser } from '../../models/app-user';
 
 
 
@@ -17,4 +18,10 @@ export class UserService {
       email: user.email
     })
   }
+
+  get(uid: string): AngularFireList<AppUser>  {
+    return this.db.list('/users/'+uid)
+  }
+
+  
 }
