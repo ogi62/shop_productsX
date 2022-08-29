@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AuthService } from './shared/services/auth.service';
+import { AuthService } from './shared/services/authService/auth.service';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { RouterModule } from '@angular/router';
 import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './shared/shell/signin/signin.component';
@@ -19,50 +19,58 @@ import { OrderSuccessComponent } from './feature/order-success/order-success.com
 import { MyOrdersComponent } from './feature/my-orders/my-orders.component';
 import { AdminProductsComponent } from './feature/admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './feature/admin/admin-orders/admin-orders.component';
+import { AuthGuardService } from './shared/services/authGuardService/auth-guard.service';
+import { UserService } from './shared/services/userService/user.service';
 
 const routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'products',
-    component: ProductsComponent
+    component: ProductsComponent,
   },
   {
     path: 'shopping-cart',
-    component: ShoppingCartComponent
-  },
-  {
-    path: 'check-out',
-    component: CheckOutComponent
-  },
-  {
-    path: 'order-success',
-    component: OrderSuccessComponent
-  },
-  {
-    path: 'my/orders',
-    component: MyOrdersComponent
+    component: ShoppingCartComponent,
   },
   {
     path: 'login',
-    component: SigninComponent
+    component: SigninComponent,
+  },
+
+  {
+    path: 'check-out',
+    component: CheckOutComponent,
+    canActivate: [AuthGuardService],
   },
   {
-    path:'admin/products',
-    component: AdminProductsComponent
+    path: 'order-success',
+    component: OrderSuccessComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'my/orders',
+    component: MyOrdersComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'admin/products',
+    component: AdminProductsComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'admin/orders',
-    component: AdminOrdersComponent
+    component: AdminOrdersComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: '**',
     redirectTo: '/',
-    pathMatch: 'full'
-  }
-]
+    pathMatch: 'full',
+  },
+];
 
 @NgModule({
   declarations: [
@@ -82,10 +90,11 @@ const routes = [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     RouterModule.forRoot(routes),
-    NgbDropdownModule
+    NgbDropdownModule,
   ],
-  providers: [AuthService],
-  bootstrap: [AppComponent]
+  providers: [AuthService, AuthGuardService, UserService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

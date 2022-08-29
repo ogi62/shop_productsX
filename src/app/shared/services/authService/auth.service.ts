@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {  GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +13,17 @@ export class AuthService {
 
   constructor(
     private afAuth: AngularFireAuth,
+    private router: ActivatedRoute,
+    private route: Router
   ) {
     this.user$ = this.afAuth.authState;
     console.log(this.user$)
   }
   // Sign in with Google
   GoogleAuth() {
+    let returnUrl = this.router.snapshot.queryParamMap.get('returnUrl') || '/';
+    localStorage.setItem('returnUrl', returnUrl);
+
     return this.AuthLogin(new GoogleAuthProvider());
   }
   // Auth logic to run auth providers
@@ -35,5 +41,6 @@ export class AuthService {
   //.Logout
   logOut() {
     this.afAuth.signOut();
+    this.route.navigate(['/']);
   }
 }
