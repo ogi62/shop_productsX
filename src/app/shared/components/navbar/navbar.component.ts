@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,10 +9,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  user$!: Observable<any>;
 
-  constructor(private authService: AuthService ) { 
-    this.user$ = this.authService.user$;
+  constructor(public authService: AuthService ) { 
   }
 
   ngOnInit(): void {
