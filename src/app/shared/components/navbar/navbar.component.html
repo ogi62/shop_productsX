@@ -8,14 +8,10 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a routerLink="/" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a routerLink="/login" class="nav-link px-2 text-white">Log In</a></li>
           <li><a routerLink="check-out" class="nav-link px-2 text-white">Check Out</a></li>
-          <li ngbDropdown class="d-inline-block">
+          <li ngbDropdown class="d-inline-block" *ngIf="user$ | async as user; else anonymousUser">
             <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-             <span *ngIf="user; else elseBlock">{{ user}}</span>
-             <ng-template #elseBlock>
-              Username
-            </ng-template>
+             <span >{{ user.displayName }}</span>
             </button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem routerLink="/my/orders">My Orders</button>
@@ -27,8 +23,12 @@
         </ul>
 
 
-        <div class="d-flex">
-            <app-signin></app-signin>
+        <div class="d-flex" >
+          <ng-template #anonymousUser>
+              <app-signin></app-signin>
+          </ng-template>
+          
+          <button class="btn btn-warning mx-2" (click)="logout()" *ngIf="user$ | async">Log Out</button>
           <button type="button" class="btn btn-warning">Sign-up</button>
         </div>
       </div>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,13 +9,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  user!: string | undefined;
+  user$!: Observable<any>;
 
   constructor(private authService: AuthService ) { 
-    this.authService.user$.subscribe((res)=> {
-      this.user = res?.displayName;
-      console.log(res?.displayName);
-    })
+    this.user$ = this.authService.user$;
   }
 
   ngOnInit(): void {
@@ -24,5 +21,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.authService.logOut();
   }
+
+ 
 
 }
