@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { GoogleAuthProvider } from 'firebase/auth';
+import {  GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  user!: string | null | undefined;
+  user$!: Observable<any>;
 
   constructor(
-    public afAuth: AngularFireAuth // Inject Firebase auth service
+    private afAuth: AngularFireAuth,
   ) {
-    this.afAuth.authState.subscribe((x)=> {
-      this.user = x?.displayName
-      console.log(this.user)
-    })
+    this.user$ = this.afAuth.authState;
+    console.log(this.user$)
   }
   // Sign in with Google
   GoogleAuth() {

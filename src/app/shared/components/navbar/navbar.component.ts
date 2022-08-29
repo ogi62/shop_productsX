@@ -9,15 +9,19 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
+  user!: string | undefined;
 
   constructor(private authService: AuthService ) { 
+    this.authService.user$.subscribe((res)=> {
+      this.user = res?.displayName;
+      console.log(res?.displayName);
+    })
   }
 
   ngOnInit(): void {
   }
 
   logout() {
-    console.log("logout mala !")
     this.authService.logOut();
   }
 
