@@ -7,6 +7,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { RouterModule } from '@angular/router';
 import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './shared/shell/signin/signin.component';
@@ -24,6 +25,7 @@ import { UserService } from './shared/services/userService/user.service';
 import { AdminAuthGuardService } from './shared/services/adminAuthGuardService/admin-auth-guard.service';
 import { ProductFormComponent } from './feature/admin/admin-products/components/product-form/product-form.component';
 import { CategoryService } from './shared/services/categoryService/category.service';
+import { ProductsService } from './feature/admin/admin-products/services/productsService/products.service';
 
 const routes = [
   {
@@ -102,13 +104,15 @@ const routes = [
     AngularFireDatabaseModule,
     RouterModule.forRoot(routes),
     NgbDropdownModule,
+    FormsModule
   ],
   providers: [
     AuthService, 
     AuthGuardService,
     UserService,
     AdminAuthGuardService,
-    CategoryService
+    CategoryService,
+    ProductsService
   ],
   bootstrap: [AppComponent],
 })

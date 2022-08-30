@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/shared/services/categoryService/category.service';
+import { ProductsService } from '../../services/productsService/products.service';
 
 export interface Categories {
   bread: string;
@@ -7,6 +8,13 @@ export interface Categories {
   fruits: string;
   seasonings: string;
   vegetables: string;
+}
+
+export interface Product {
+  name: string;
+  price: number;
+  categories: string;
+  imageUrl: string;
 }
 
 @Component({
@@ -18,7 +26,10 @@ export class ProductFormComponent implements OnInit {
 
   categories$!: any;
 
-  constructor(private categoryService: CategoryService) {
+  constructor(
+    private categoryService: CategoryService,
+    private productsService: ProductsService
+    ) {
     this.categoryService.getCategories().subscribe((res)=> {
       console.log(res);
       this.categories$ = res;
@@ -26,6 +37,10 @@ export class ProductFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  save(product: Product) {
+    this.productsService.create(product);
   }
 
 }
