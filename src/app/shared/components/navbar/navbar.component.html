@@ -15,10 +15,10 @@
             </button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem routerLink="/my/orders">My Orders</button>
-              <ng-template *ngIf="appUser.isAdmin">
+              <div *ngIf="appUser.isAdmin">
                 <button ngbDropdownItem routerLink="/admin/orders">Manage Orders</button>
                 <button ngbDropdownItem routerLink="/admin/products">Manage Products</button>
-              </ng-template>
+              </div>
               <button ngbDropdownItem (click)="logout()">Log Out</button>
             </div>
           </li>
