@@ -59,12 +59,12 @@ const routes = [
   {
     path: 'admin/products',
     component: AdminProductsComponent,
-    canActivate: [AuthGuardService],
+    canActivate: [AuthGuardService, AdminAuthGuardService],
   },
   {
     path: 'admin/orders',
     component: AdminOrdersComponent,
-    canActivate: [AuthGuardService],
+    canActivate: [AuthGuardService, AdminAuthGuardService],
   },
   {
     path: '**',

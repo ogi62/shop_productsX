@@ -16,6 +16,7 @@ export class AppComponent {
     ) {
     auth.user$.subscribe((user)=> {
       if(user) {
+        userService.get(user.uid);
         userService.save(user);
         let returnUrl = String(localStorage.getItem('returnUrl'));
         router.navigateByUrl(returnUrl);
