@@ -22,8 +22,7 @@ export class AdminAuthGuardService implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    return this.auth.user$.pipe(
-      switchMap((user: AppUser) => this.userService.get(user.uid)),
+    return this.auth.appUser$.pipe(
       map((appUser) => appUser.isAdmin)
     );
   }

@@ -9,14 +9,16 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a routerLink="/" class="nav-link px-2 text-secondary">Home</a></li>
           <li><a routerLink="check-out" class="nav-link px-2 text-white">Check Out</a></li>
-          <li ngbDropdown class="d-inline-block" *ngIf="authService.user$ | async as user; else anonymousUser">
+          <li ngbDropdown class="d-inline-block" *ngIf="appUser; else anonymousUser">
             <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-             <span >{{ user.displayName }}</span>
+             <span >{{ appUser.name }}</span>
             </button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem routerLink="/my/orders">My Orders</button>
-              <button ngbDropdownItem routerLink="/admin/orders">Manage Orders</button>
-              <button ngbDropdownItem routerLink="/admin/products">Manage Products</button>
+              <ng-template *ngIf="appUser.isAdmin">
+                <button ngbDropdownItem routerLink="/admin/orders">Manage Orders</button>
+                <button ngbDropdownItem routerLink="/admin/products">Manage Products</button>
+              </ng-template>
               <button ngbDropdownItem (click)="logout()">Log Out</button>
             </div>
           </li>
@@ -28,7 +30,7 @@
               <app-signin></app-signin>
           </ng-template>
           
-          <button class="btn btn-warning mx-2" (click)="logout()" *ngIf="authService.user$ | async">Log Out</button>
+          <button class="btn btn-warning mx-2" (click)="logout()" *ngIf="appUser">Log Out</button>
           <button type="button" class="btn btn-warning">Sign-up</button>
         </div>
       </div>
