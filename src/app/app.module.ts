@@ -22,6 +22,8 @@ import { AdminOrdersComponent } from './feature/admin/admin-orders/admin-orders.
 import { AuthGuardService } from './shared/services/authGuardService/auth-guard.service';
 import { UserService } from './shared/services/userService/user.service';
 import { AdminAuthGuardService } from './shared/services/adminAuthGuardService/admin-auth-guard.service';
+import { ProductFormComponent } from './feature/admin/admin-products/components/product-form/product-form.component';
+import { CategoryService } from './shared/services/categoryService/category.service';
 
 const routes = [
   {
@@ -62,6 +64,11 @@ const routes = [
     canActivate: [AuthGuardService, AdminAuthGuardService],
   },
   {
+    path: 'admin/products/new',
+    component: ProductFormComponent,
+    canActivate: [AuthGuardService, AdminAuthGuardService],
+  },
+  {
     path: 'admin/orders',
     component: AdminOrdersComponent,
     canActivate: [AuthGuardService, AdminAuthGuardService],
@@ -86,6 +93,7 @@ const routes = [
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,7 +107,8 @@ const routes = [
     AuthService, 
     AuthGuardService,
     UserService,
-    AdminAuthGuardService
+    AdminAuthGuardService,
+    CategoryService
   ],
   bootstrap: [AppComponent],
 })
