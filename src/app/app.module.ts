@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
+
 import { AppComponent } from './app.component';
 import { SigninComponent } from './shared/shell/signin/signin.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
@@ -104,7 +105,7 @@ const routes = [
     AngularFireDatabaseModule,
     RouterModule.forRoot(routes),
     NgbDropdownModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     AuthService, 
