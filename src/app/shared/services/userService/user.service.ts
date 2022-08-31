@@ -27,7 +27,6 @@ export class UserService {
       )
       .get()
       .then((res) => res.val());
-      console.log(result);
 
     return result;
   }

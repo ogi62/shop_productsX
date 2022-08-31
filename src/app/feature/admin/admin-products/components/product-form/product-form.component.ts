@@ -42,6 +42,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   save(product: Product) {
+    console.log(product)
     this.productsService.create(product);
     this.router.navigate(['/admin/products']);
   }
