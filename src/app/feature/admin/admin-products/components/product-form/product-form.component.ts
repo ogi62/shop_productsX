@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/shared/services/categoryService/category.service';
 import { ProductsService } from '../../services/productsService/products.service';
 
@@ -16,6 +16,7 @@ export interface Product {
   price: number;
   categories: string;
   imageUrl: string;
+  id: number | string;
 }
 
 @Component({
@@ -26,17 +27,24 @@ export interface Product {
 export class ProductFormComponent implements OnInit {
 
   categories$!: any;
+  product!: any;
 
   constructor(
     private categoryService: CategoryService,
     private productsService: ProductsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
     ) {
     this.categoryService.getCategories().subscribe((res)=> {
       console.log(res);
       this.categories$ = res;
     });
-   }
+
+    // let id = this.route.snapshot.paramMap.get('id');
+    // if(id) this.productsService.get(id).subscribe((p)=> {
+    //   this.product = p
+    // })
+  }
 
   ngOnInit(): void {
   }

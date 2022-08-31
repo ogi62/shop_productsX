@@ -42,4 +42,9 @@ export class ProductsService {
     );
   }
 
+  get(productId: number | string) {
+    return this.db.object('/products'+ productId)
+  }
+
+
 }
