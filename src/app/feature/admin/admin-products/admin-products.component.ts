@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Product } from './components/product-form/product-form.component';
-import { ProductsService } from './services/productsService/products.service';
+import { ProductInterface, ProductsService } from './services/productsService/products.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -11,19 +11,18 @@ import { ProductsService } from './services/productsService/products.service';
 })
 export class AdminProductsComponent implements OnInit {
 
-  products$: any[] = [];
+  products$!: any;
 
   constructor(
     private productsService: ProductsService,
     private router: Router
-  ) { 
-   this.productsService.getProducts().subscribe((res: any[])=>{
-    console.log(res[0])
-    this.products$ = res[0];
-   });
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.productsService.getProducts().subscribe((res) => {
+      console.log('res',res);
+      this.products$ = res;
+    })
   }
 
   editProduct(product: Product) {

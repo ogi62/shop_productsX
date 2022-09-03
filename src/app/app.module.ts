@@ -27,6 +27,7 @@ import { AdminAuthGuardService } from './shared/services/adminAuthGuardService/a
 import { ProductFormComponent } from './feature/admin/admin-products/components/product-form/product-form.component';
 import { CategoryService } from './shared/services/categoryService/category.service';
 import { ProductsService } from './feature/admin/admin-products/services/productsService/products.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes = [
   {
@@ -111,6 +112,7 @@ const routes = [
     RouterModule.forRoot(routes),
     NgbDropdownModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [
     AuthService, 
