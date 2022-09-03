@@ -29,7 +29,7 @@ export class ProductsService {
  
 
   getProducts() {
-    return this.http.get('http://localhost:3000/products');
+    return this.http.get<ProductInterface[]>('http://localhost:3000/products');
   }
 
 

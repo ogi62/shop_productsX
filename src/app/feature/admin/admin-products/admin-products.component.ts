@@ -11,7 +11,7 @@ import { ProductInterface, ProductsService } from './services/productsService/pr
 })
 export class AdminProductsComponent implements OnInit {
 
-  products$!: any;
+  products$!: ProductInterface[];
 
   constructor(
     private productsService: ProductsService,
@@ -25,7 +25,7 @@ export class AdminProductsComponent implements OnInit {
     })
   }
 
-  editProduct(product: Product) {
+  editProduct(product: ProductInterface) {
     this.router.navigate(['/admin/products/',product.id])
   }
 
