@@ -28,6 +28,7 @@ import { ProductFormComponent } from './feature/admin/admin-products/components/
 import { CategoryService } from './shared/services/categoryService/category.service';
 import { ProductsService } from './feature/admin/admin-products/services/productsService/products.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchPipePipe } from './feature/admin/admin-products/pipes/searchPipe/search-pipe.pipe';
 
 const routes = [
   {
@@ -103,6 +104,7 @@ const routes = [
     AdminProductsComponent,
     AdminOrdersComponent,
     ProductFormComponent,
+    SearchPipePipe,
   ],
   imports: [
     BrowserModule,

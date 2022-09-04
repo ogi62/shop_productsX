@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Product } from './components/product-form/product-form.component';
 import {
   ProductInterface,
@@ -12,18 +12,22 @@ import {
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css'],
 })
-export class AdminProductsComponent implements OnInit {
-  products$!: ProductInterface[];
+export class AdminProductsComponent implements OnInit, OnDestroy {
+  products!: ProductInterface[];
+  subscription!: Subscription;
+  search!: string;
 
   constructor(
     private productsService: ProductsService,
     private router: Router
-  ) {}
+  ) {
+    this.subscription = this.productsService.getProducts().subscribe((res) => {
+      this.products = res;
+    });
+  }
 
   ngOnInit(): void {
-    this.productsService.getProducts().subscribe((res) => {
-      this.products$ = res;
-    });
+
   }
 
   editProduct(product: ProductInterface) {
@@ -36,10 +40,13 @@ export class AdminProductsComponent implements OnInit {
     } else {
       this.productsService.deleteProduct(id).subscribe((result) => {
         this.productsService.getProducts().subscribe((data) => {
-          this.products$ = data;
+          this.products = data;
         });
       });
     }
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
