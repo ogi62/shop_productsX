@@ -15,7 +15,9 @@
             <td>{{p.price }}</td>
             <td>{{ p.id }}</td>
             <td>
-                <a (click)="editProduct(p)">Edit</a>
+                <button class="btn btn-info" (click)="editProduct(p)">Edit</button>
+                <button class="btn btn-danger" (click)="deleteProduct(p.id)">Delete</button>
+
             </td>
         </tr>
     </tbody>

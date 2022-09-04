@@ -33,18 +33,20 @@ export class ProductsService {
 
  
 
-  getProducts() {
+  getProducts(): Observable<ProductInterface[]> {
     return this.http.get<ProductInterface[]>(this.apiURL);
   }
 
-  editProduct(product: ProductInterface) {
+  editProduct(product: ProductInterface): Observable<ProductInterface> {
     return this.http.put<ProductInterface>(`${this.apiURL}/${product.id}`, product, headerOption);
   }
 
-  getProduct(id:  number | string )  {
+  getProduct(id:  number | string ):Observable<ProductInterface>  {
     return this.http.get<ProductInterface>(this.apiURL + '/' + id);
   }
 
-
+  deleteProduct(id: Number): Observable<ProductInterface> {
+    return this.http.delete<ProductInterface>(`${this.apiURL}/${id}`, headerOption);
+  }
 
 }
