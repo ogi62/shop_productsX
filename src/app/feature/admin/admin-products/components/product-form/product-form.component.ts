@@ -5,6 +5,7 @@ import {
   ProductInterface,
   ProductsService,
 } from '../../services/productsService/products.service';
+import { pipe, take } from 'rxjs';
 
 export interface Categories {
   bread: string;
@@ -28,7 +29,12 @@ export interface Product {
 })
 export class ProductFormComponent implements OnInit {
   categories$!: any;
-  product!: any;
+  product: ProductInterface = {
+    title: '',
+    imageUrl: '',
+    category: '',
+  };
+  id: any;
 
   constructor(
     private categoryService: CategoryService,
@@ -37,25 +43,44 @@ export class ProductFormComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.categoryService.getCategories().subscribe((res) => {
-      console.log(res);
       this.categories$ = res;
     });
+
+    this.id = this.route.snapshot.paramMap.get('id');
+
+    if (this.id) {
+      this.productsService
+        .getProduct(this.id)
+        .pipe(take(1))
+        .subscribe((res: ProductInterface) => {
+          this.product = res;
+        });
+    }
   }
 
   ngOnInit(): void {}
 
-  save(product: Product) {
-    let productWithID: ProductInterface = {
-      id: Math.floor(Math.random() * 1000000),
-      ...product,
-    };
+  save(product: ProductInterface) {
+    if (this.id) {
+      this.productsService
+        .editProduct(this.product)
+        .subscribe((res: ProductInterface) => {
+          this.productsService.getProducts();
+        });
+    } else {
+      let productWithID: ProductInterface = {
+        id: Math.floor(Math.random() * 1000000),
+        ...product,
+      };
 
-    this.productsService
-      .create(productWithID)
-      .subscribe((result: ProductInterface) => {
-        console.log(result);
-        this.productsService.getProducts();
-      });
-    this.router.navigate(['/admin/products']);
+      this.productsService
+        .createProduct(productWithID)
+        .subscribe((result: ProductInterface) => {
+          this.productsService.getProducts();
+        });
+    }
+    setTimeout(() => {
+      this.router.navigate(['/admin/products']);
+    }, 400);
   }
 }

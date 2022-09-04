@@ -4,10 +4,10 @@ import { Product } from '../../components/product-form/product-form.component';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 export interface ProductInterface {
-  id: number;
+  id?: number;
   category: string;
   title: string;
-  price: number;
+  price?: number;
   imageUrl: string;
 }
 
@@ -27,7 +27,7 @@ export class ProductsService {
     private http: HttpClient
     ) {}
 
-  create(product: ProductInterface): Observable<ProductInterface> {
+  createProduct(product: ProductInterface): Observable<ProductInterface> {
     return this.http.post<ProductInterface>(this.apiURL, product, headerOption);
   }
 
@@ -35,6 +35,14 @@ export class ProductsService {
 
   getProducts() {
     return this.http.get<ProductInterface[]>(this.apiURL);
+  }
+
+  editProduct(product: ProductInterface) {
+    return this.http.put<ProductInterface>(`${this.apiURL}/${product.id}`, product, headerOption);
+  }
+
+  getProduct(id:  number | string )  {
+    return this.http.get<ProductInterface>(this.apiURL + '/' + id);
   }
 
 

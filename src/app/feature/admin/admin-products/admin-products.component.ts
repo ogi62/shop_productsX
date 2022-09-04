@@ -21,7 +21,6 @@ export class AdminProductsComponent implements OnInit {
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((res) => {
       this.products$ = res;
-      console.log(this.products$)
     })
   }
 
