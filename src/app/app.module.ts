@@ -35,7 +35,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 const routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: ProductsComponent,
   },
   {
     path: 'products',

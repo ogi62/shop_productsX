@@ -91,5 +91,25 @@
       "category": "fruits",
       "imageUrl": ""
     }
+  ],
+  "categories": [
+    {
+      "name": "Bread"
+    },
+    {
+      "name": "Diary"
+    },
+    {
+      "name": "Fruits"
+    },
+    {
+      "name": "Seasonings and Spices"
+    },
+    {
+      "name": "Chocolate"
+    },
+    {
+      "name": "Vegetables"
+    }
   ]
 }

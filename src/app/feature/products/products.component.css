@@ -1,0 +1,12 @@
+.categories {
+    cursor: pointer;
+    color: green;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.5s ease-in-out;
+}
+
+.categories:hover {
+    background-color: green;
+    color: white;
+}

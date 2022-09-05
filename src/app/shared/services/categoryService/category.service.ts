@@ -1,34 +1,23 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { from, of } from 'rxjs';
+import { CategoryInterface } from '../../models/category';
+
+
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
-  constructor(private db: AngularFireDatabase) {}
 
-  //  getCategories() {
-  //   let obsCategories;
-  //   let result =  this.db.database
-  //     .refFromURL(
-  //       'https://shop-productsx-default-rtdb.firebaseio.com/categories'
-  //     )
-  //     .get()
-  //     .then((res) => {
-  //       console.log(res.val());
-  //       obsCategories = res.val();
-  //     });
-  //     console.log(obsCategories);
-    
-      
-  //   return from(result);
-  // }
+  private apiURL : string = 'http://localhost:3000/categories';
 
-  getCategories() {
-    return this.db.list('/categories').snapshotChanges();
-    // return this.db.list('/categories')
+  constructor(private http: HttpClient) {}
+
+   getCategories() {
+    return this.http.get<CategoryInterface[]>(this.apiURL)
   }
 
- 
 }
