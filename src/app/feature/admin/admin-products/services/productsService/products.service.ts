@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, map, Observable, toArray } from 'rxjs';
-import { Product } from '../../components/product-form/product-form.component';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { ProductInterface } from '../../models/product';
 
-export interface ProductInterface {
-  id?: number;
-  category: string;
-  title: string;
-  price?: number;
-  imageUrl: string;
-}
+
 
 const headerOption = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

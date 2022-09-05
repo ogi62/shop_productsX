@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { Product } from './components/product-form/product-form.component';
+import { ProductInterface } from './models/product';
 import {
-  ProductInterface,
   ProductsService,
 } from './services/productsService/products.service';
 
@@ -16,18 +15,25 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   products!: ProductInterface[];
   subscription!: Subscription;
   search!: string;
+  //pagination
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: number[] = [5,10,15,20];
 
   constructor(
     private productsService: ProductsService,
     private router: Router
-  ) {
-    this.subscription = this.productsService.getProducts().subscribe((res) => {
-      this.products = res;
-    });
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.subscription = this.getAllProducts();
+  }
 
+  getAllProducts() {
+    return this.productsService.getProducts().subscribe((res) => {
+      this.products = res;
+    });
   }
 
   editProduct(product: ProductInterface) {
@@ -44,6 +50,20 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
         });
       });
     }
+  }
+
+  //pagination
+  onTableDataChange(event: any) {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.getAllProducts();
+  }
+
+  onTableSizeChange(event: any) {
+    console.log(event.target.value)
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.getAllProducts();
   }
 
   ngOnDestroy(): void {

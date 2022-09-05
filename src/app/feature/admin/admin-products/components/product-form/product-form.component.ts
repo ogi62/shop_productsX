@@ -1,26 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/shared/services/categoryService/category.service';
-import {
-  ProductInterface,
-  ProductsService,
-} from '../../services/productsService/products.service';
+import { ProductsService} from '../../services/productsService/products.service';
 import { pipe, take } from 'rxjs';
+import { ProductInterface } from '../../models/product';
 
-export interface Categories {
-  bread: string;
-  dairy: string;
-  fruits: string;
-  seasonings: string;
-  vegetables: string;
-}
 
-export interface Product {
-  title: string;
-  price: number;
-  category: string;
-  imageUrl: string;
-}
+
+
 
 @Component({
   selector: 'app-product-form',

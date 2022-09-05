@@ -29,6 +29,8 @@ import { CategoryService } from './shared/services/categoryService/category.serv
 import { ProductsService } from './feature/admin/admin-products/services/productsService/products.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchPipePipe } from './feature/admin/admin-products/pipes/searchPipe/search-pipe.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes = [
   {
@@ -114,7 +116,9 @@ const routes = [
     RouterModule.forRoot(routes),
     NgbDropdownModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthService, 

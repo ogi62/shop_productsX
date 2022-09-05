@@ -13,7 +13,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let p of products | filter: search">
+        <tr *ngFor="let p of products | filter: search | paginate: {
+            itemsPerPage: tableSize,
+            currentPage: page,
+            totalItems: count
+        };
+        let i - index
+        ">
             <td>{{p.title}}</td>
             <td>{{p.price }}</td>
             <td>{{ p.id }}</td>
@@ -25,3 +31,6 @@
         </tr>
     </tbody>
 </table>
+<div>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</div>
