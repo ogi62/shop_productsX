@@ -31,6 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SearchPipePipe } from './feature/admin/admin-products/pipes/searchPipe/search-pipe.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProductFilterComponent } from './feature/products/components/product-filter/product-filter.component';
+import { ProductCardComponent } from './shared/components/product-card/product-card.component';
 
 const routes = [
   {
@@ -107,6 +109,8 @@ const routes = [
     AdminOrdersComponent,
     ProductFormComponent,
     SearchPipePipe,
+    ProductFilterComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,

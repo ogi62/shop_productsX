@@ -1,42 +1,17 @@
 <div class="container text-center">
     <div class="row">
         <div class="col-3 mt-5">
-            <div class="list-group">
-              <a 
-              class="list-group-item categories list-group-item-action"
-              [class.active]="!category"
-              routerLink="/"
-              >
-                All Categories
-              </a>
-                <a 
-                *ngFor="let c of categories" 
-                class="list-group-item categories list-group-item-action"
-                routerLink="/"
-                [queryParams]="{category: c.name}"
-                [class.active]="category === c.name">
-                    {{ c.name }}
-                </a>
-              </div>
+            <product-filter [category]="category"></product-filter>
         </div>
         <div class="col">
-            <div class="row">
-                <ng-container *ngFor="let product of filteredProducts; let i = index">
-                  <div class="col">
-                    <div class="card mt-5" style="width: 15rem">
-                      <img [src]="product.imageUrl" class="card-img-top" />
-                      <div class="card-body">
-                        <h5 class="card-title">{{ product.title }}</h5>
-                        <p class="card-text">
-                          {{ product.price | currency: "USD":"symbol" }}
-                        </p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
-                </ng-container>
-              </div>
+          <div class="row">
+            <ng-container *ngFor="let product of filteredProducts; let i = index">
+                <div class="col">
+                  <product-card [product]="product" [width-15]="true"></product-card>
+                </div>
+                <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
+              </ng-container>
         </div>
+                </div>
     </div>  
 </div>

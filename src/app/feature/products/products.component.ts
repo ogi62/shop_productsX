@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { CategoryInterface } from 'src/app/shared/models/category';
-import { CategoryService } from 'src/app/shared/services/categoryService/category.service';
 import {
-  Product,
   ProductInterface,
 } from '../admin/admin-products/models/product';
 import { ProductsService } from '../admin/admin-products/services/productsService/products.service';
@@ -15,20 +11,21 @@ import { ProductsService } from '../admin/admin-products/services/productsServic
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  products: ProductInterface[] = [];
-  categories!: CategoryInterface[];
   category!: string | null;
+  products: ProductInterface[] = [];
   filteredProducts!: ProductInterface[];
 
   constructor(
     private productService: ProductsService,
-    private categoryService: CategoryService,
     private route: ActivatedRoute
   ) {
     this.getProducts();
-    this.getCategories();
     this.getProductsByCategory();
   }
+
+  
+
+  ngOnInit(): void {}
 
   getProducts() {
     this.productService
@@ -39,11 +36,7 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  getCategories() {
-    this.categoryService.getCategories().subscribe((category) => {
-      this.categories = category;
-    });
-  }
+  
 
   getProductsByCategory() {
     this.route.queryParamMap.subscribe((params) => {
@@ -55,6 +48,4 @@ export class ProductsComponent implements OnInit {
         : this.products;
     });
   }
-
-  ngOnInit(): void {}
 }
