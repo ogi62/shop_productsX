@@ -44,8 +44,8 @@
           required
         >
           <option value="x">X</option>
-          <option *ngFor="let c of categories$" [value]="c.key">
-            {{ c.key }}
+          <option *ngFor="let c of categories$" [value]="c.name">
+            {{ c.name }}
           </option>
         </select>
         <div
