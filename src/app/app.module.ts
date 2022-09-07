@@ -33,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductFilterComponent } from './feature/products/components/product-filter/product-filter.component';
 import { ProductCardComponent } from './shared/components/product-card/product-card.component';
+import { ShoppingCartService } from './shared/services/shoppingCartService/shopping-cart.service';
 
 const routes = [
   {
@@ -130,7 +131,8 @@ const routes = [
     UserService,
     AdminAuthGuardService,
     CategoryService,
-    ProductsService
+    ProductsService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent],
 })

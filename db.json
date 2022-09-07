@@ -138,5 +138,39 @@
       "id": 6,
       "name": "Vegetables"
     }
+  ],
+  "shopping-cart": [
+    {
+      "dateCreated": 1662555101496,
+      "id": 1
+    },
+    {
+      "dateCreated": 1662555107157,
+      "id": 2
+    },
+    {
+      "dateCreated": 1662555302894,
+      "id": 8017625
+    },
+    {
+      "dateCreated": 1662555305392,
+      "id": 9845763
+    },
+    {
+      "dateCreated": 1662555453120,
+      "id": 235449
+    },
+    {
+      "dateCreated": 1662558633179,
+      "id": 1800550
+    },
+    {
+      "dateCreated": 1662558693593,
+      "id": 4769592
+    },
+    {
+      "dateCreated": 1662558717561,
+      "id": 4072599
+    }
   ]
 }

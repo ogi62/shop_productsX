@@ -1,12 +1,28 @@
-<div *ngIf="product.title" class="card mt-5" [style]="width15 ? 'width: 15rem;' : 'width: 25rem;'">
-  <img *ngIf="product.imageUrl" [src]="product.imageUrl" [alt]="product.title" class="card-img-top" />
+<div
+  *ngIf="product.title"
+  class="card mt-5"
+  [style]="width15 ? 'width: 15rem;' : 'width: 25rem;'"
+>
+  <img
+    *ngIf="product.imageUrl"
+    [src]="product.imageUrl"
+    [alt]="product.title"
+    class="card-img-top"
+  />
   <div class="card-body">
     <h5 class="card-title">{{ product.title }}</h5>
     <p class="card-text">
       {{ product.price | currency: "USD":"symbol" }}
     </p>
     <div [class.footer]="showActions">
-        <a *ngIf="showActions" href="#" class="btn btn-primary" [class.click]="showActions">Add to Cart</a>
+      <button
+        *ngIf="showActions"
+        (click)="addToCart(product)"
+        class="btn btn-primary"
+        [class.click]="showActions"
+      >
+        Add to Cart
+      </button>
     </div>
   </div>
 </div>

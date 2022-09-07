@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductInterface } from 'src/app/feature/admin/admin-products/models/product';
 import { ProductsService } from 'src/app/feature/admin/admin-products/services/productsService/products.service';
+import { ShoppingCartInterface } from '../../models/shoppingCart';
+import { ShoppingCartService } from '../../services/shoppingCartService/shopping-cart.service';
+
 
 @Component({
   selector: 'product-card',
@@ -18,11 +21,15 @@ export class ProductCardComponent implements OnInit {
 
 
 
-  constructor() {
+  constructor(private shoppingCartService: ShoppingCartService) {
     
    }
 
   ngOnInit(): void {
+  }
+
+  addToCart(product: ProductInterface) {
+    this.shoppingCartService.getOrCreateCart();
   }
   
   
