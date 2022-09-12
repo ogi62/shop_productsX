@@ -20,6 +20,7 @@ export class ProductFormComponent implements OnInit {
     title: '',
     imageUrl: '',
     category: '',
+    id: 0
   };
   id: any;
 
@@ -56,8 +57,8 @@ export class ProductFormComponent implements OnInit {
         });
     } else {
       let productWithID: ProductInterface = {
-        id: Math.floor(Math.random() * 1000000),
         ...product,
+        id: Math.floor(Math.random() * 1000000),
       };
 
       this.productsService
