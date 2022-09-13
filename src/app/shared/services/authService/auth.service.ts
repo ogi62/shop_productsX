@@ -5,6 +5,7 @@ import { Observable, of, switchMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppUser } from '../../models/app-user';
 import { UserService } from '../userService/user.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +13,16 @@ import { UserService } from '../userService/user.service';
 export class AuthService {
 
   user$!: Observable<any>;
+  private apiUrl: string = 'http://localhost:3000/shopping-cart';
+
 
   constructor(
     private afAuth: AngularFireAuth,
     private router: ActivatedRoute,
     private route: Router,
-    private userService: UserService
-  ) {
+    private userService: UserService,
+    private http: HttpClient
+    ) {
     this.user$ = this.afAuth.authState;
     console.log(this.user$)
   }
@@ -43,6 +47,9 @@ export class AuthService {
 
   //.Logout
   logOut() {
+    const cartId = localStorage.getItem('cartId');
+    this.deleteProduct(cartId);
+    localStorage.clear();
     this.afAuth.signOut();
     this.route.navigate(['/']);
   }
@@ -57,5 +64,9 @@ export class AuthService {
       }      
     })
     )
+  }
+
+  deleteProduct(id: string | null){
+    return this.http.delete(this.apiUrl+'/'+id);
   }
 }

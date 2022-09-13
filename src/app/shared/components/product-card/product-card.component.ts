@@ -29,12 +29,14 @@ export class ProductCardComponent implements OnInit {
   }
 
   addToCart(product: ProductInterface) {
-    this.shoppingCartService.addToCart(product.id).subscribe(
-      result => {
-        this.shoppingCartService.cartItemcount$.next(result);
-      }, error => {
-        console.log('Error ocurred while addToCart data : ', error);
-      });
+    // this.shoppingCartService.addToCart(product.id).subscribe(
+    //   result => {
+    //     this.shoppingCartService.cartItemcount$.next(result);
+    //   }, error => {
+    //     console.log('Error ocurred while addToCart data : ', error);
+    //   });
+    console.log(product,'ovo je proizvod');
+    this.shoppingCartService.addToCart(product);
   }
   
   
